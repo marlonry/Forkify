@@ -10,7 +10,7 @@ import { elements, renderLoader, clearLoader } from './views/base';
  * Liked recipes objects
  */
 
-const state = {}
+const state = {};
 
 
 /**
@@ -18,7 +18,11 @@ const state = {}
  */
 const controlSearch = async () => {
     // 1. get query from the view
-    const query = searchView.getInput();
+    // const query = searchView.getInput();
+
+    // TESTING -----------
+    const query = 'pizza';
+
 
     if(query) {
         // 2. new search object and add to state
@@ -29,19 +33,32 @@ const controlSearch = async () => {
         searchView.clearResults();
         renderLoader(elements.searchRes);
 
-        // 4. search for recipes
-        await state.search.getResults();
-        
-        // 5. render results on UI
-        clearLoader();
-        searchView.renderResults(state.search.result);
-        console.log(state.search.result);
+        try {
+            // 4. search for recipes
+            await state.search.getResults();
+            
+            // 5. render results on UI
+            clearLoader();
+            searchView.renderResults(state.search.result);
+            console.log(state.search.result); // delete later on
+
+        } catch(error) {
+            console.log('Something went wrong with the search');
+            clearLoader();
+        }
+
     }
  }
 
 elements.searchForm.addEventListener('submit', e => {
     e.preventDefault();
-    controlSearch()
+    controlSearch();
+ });
+
+ // TESTING ---------
+window.addEventListener('load', e => {
+    e.preventDefault();
+    controlSearch();
  });
 
 
@@ -59,7 +76,7 @@ elements.searchResPages.addEventListener('click', e => {
  * RECIPE CONTROLLER ----------------------------------------------------------------------
 */
 
-const controlRecipe = () => {
+const controlRecipe = async () => {
     // Get the id from the url
     const id = window.location.hash.replace('#', '');
     console.log(id);
@@ -69,10 +86,20 @@ const controlRecipe = () => {
 
         // create new recipe object
         state.recipe = new Recipe(id);
-        // get recipe data
-        state.recipe.getRecipe();
+
+        // TESTING ------------
+        window.r = state.recipe;
+
+        try {
+            // get recipe data
+            await state.recipe.getRecipe();
+        } catch(error) {
+            console.log('Error processing the recipe');
+        }
+
         // calculate servings and time
         state.recipe.calcServings();
+        // state.recipe.calcTime();
         // render recipe
         console.log(state.recipe);
     }
