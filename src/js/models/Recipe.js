@@ -33,8 +33,9 @@ export default class Recipe {
 
     parseIngredients() {
         // 2 arrays to replace long values to short values;
-        const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups','pounds']
+        const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds']
         const unitsShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
+        const units = [...unitsShort, 'kg', 'g'];
 
         const newIngredients = this.ingredients.map(el => {
             // 1. uniform units
@@ -47,7 +48,7 @@ export default class Recipe {
             
             // 3. parse ingredient into count, unit and ingredient.
             const arrIng = ingredient.split(' ');
-            const unitIndex = arrIng.findIndex(el2 => unitsShort.includes(el2));
+            const unitIndex = arrIng.findIndex(el2 => units.includes(el2));
 
             let objIng;
             if (unitIndex > -1) {
@@ -65,8 +66,8 @@ export default class Recipe {
 
                 objIng = {
                     count,
-                    unit = arrIng[unitIndex],
-                    ingredient = arrIng.slice(unitIndex + 1).join(' '),
+                    unit: arrIng[unitIndex],
+                    ingredient: arrIng.slice(unitIndex + 1).join(' '),
                 }
             } else if (parseInt(arrIng[0])) {
                 // there is No unit, but 1st element is a number
