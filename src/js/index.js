@@ -65,7 +65,6 @@ elements.searchResPages.addEventListener('click', e => {
 /**
  * RECIPE CONTROLLER ----------------------------------------------------------------------
 */
-
 const controlRecipe = async () => {
     // Get the id from the url
     const id = window.location.hash.replace('#', '');
@@ -75,6 +74,10 @@ const controlRecipe = async () => {
         // prepare ui for changes
         recipeView.clearRecipe();
         renderLoader(elements.recipe);
+
+        // Highlight selected search item
+        if(state.search) searchView.highlightSelected(id);
+
         // create new recipe object
         state.recipe = new Recipe(id);
 

@@ -11,6 +11,10 @@ export const clearResults = () => {
     elements.searchResPages.innerHTML = "";
 }
 
+export const highlightSelected = id => {
+    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+}
+
 const limitRecipeTitle = (title, limit = 17) => {
     if(title.length > limit) {
         return `${title.substring(0, limit)}...`;
