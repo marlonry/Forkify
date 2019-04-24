@@ -40,11 +40,11 @@ const controlSearch = async () => {
             console.log(state.search.result); // delete later on
 
         } catch(error) {
-            console.log('Something went wrong with the search');
+            console.log(`Something went wrong with the search, ${error}`);
             clearLoader();
         }
 
-    }
+    } 
  }
 
 elements.searchForm.addEventListener('submit', e => {
@@ -103,3 +103,15 @@ const controlRecipe = async () => {
 }
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+
+elements.recipe.addEventListener('click', function(e) {
+    
+    if(e.target.matches('.btn-decrease, .btn-decrease *')) {
+        // if matches button decrease
+        state.recipe.updateServings("dec");
+    } else if(e.target.matches('.btn-increase, .btn-increase *')) {
+        // if matches button increase
+        state.recipe.updateServings("inc")
+    }
+    console.log(state.recipe);
+})

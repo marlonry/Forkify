@@ -27,6 +27,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
     "axios": "^0.18.0",
+    "fraction.js": "^4.0.12",
     "fractional": "^1.0.0"
   }
 }

@@ -1,27 +1,35 @@
 import { elements } from './base';
-import { Fraction } from 'fractional';
+import Fraction from 'fraction.js';
+
+// const formatCount = count => {
+//     if(count) {
+//         // count = 2.5 ---> 2 1/2
+//         const [int, dec] = count.toString().split('.').map(el => parseInt(el, 10));
+
+//         if(!dec) return count;
+
+//         if(int === 0) {
+//             const fr = new Fraction(count);
+//             return `${fr.numerator}/${fr.denominator}`;
+//         } else {
+//             const fr = new Fraction(count - int);
+//             return `${int} ${fr.numerator}/${fr.denominator}`;
+//         }
+//     }
+//     return '?';
+// };
 
 const formatCount = count => {
-    if(count) {
-        // count = 2.5 ---> 2 1/2
-        const [int, dec] = count.toString().split('.').map(el => parseInt(el, 10));
-
-        if(!dec) return count;
-
-        if(int === 0) {
-            const fr = new Fraction(count);
-            return `${fr.numerator}/${fr.denominator}`;
-        } else {
-            const fr = new Fraction(count - int);
-            return `${int} ${fr.numerator}/${fr.denominator}`;
-        }
+    if (count) {
+    const num = new Fraction(count).simplify(0.00001);
+    return num.toFraction(true);
     }
     return '?';
 };
 
 export const clearRecipe = () => {
     elements.recipe.innerHTML = '';
-}
+};
 
 const createIngredient = ingredient => `
     <li class="recipe__item">
@@ -61,12 +69,12 @@ export const renderRecipe = recipe => {
                 <span class="recipe__info-text"> servings</span>
 
                 <div class="recipe__info-buttons">
-                    <button class="btn-tiny">
+                    <button class="btn-tiny btn-decrease">
                         <svg>
                             <use href="img/icons.svg#icon-circle-with-minus"></use>
                         </svg>
                     </button>
-                    <button class="btn-tiny">
+                    <button class="btn-tiny btn-increase">
                         <svg>
                             <use href="img/icons.svg#icon-circle-with-plus"></use>
                         </svg>
