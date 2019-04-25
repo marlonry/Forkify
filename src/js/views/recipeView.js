@@ -27,6 +27,15 @@ const formatCount = count => {
     return '?';
 };
 
+export const updateServingsIngredients = (recipe) => {
+    document.querySelector('.recipe__info-data--people').textContent = recipe.servings;
+
+    const recipeItems = Array.from(document.querySelectorAll('.recipe__count'));
+    recipeItems.forEach((el, i) => {
+        el.textContent = formatCount(recipe.ingredients[i].count);
+    });
+}
+
 export const clearRecipe = () => {
     elements.recipe.innerHTML = '';
 };
@@ -96,7 +105,7 @@ export const renderRecipe = recipe => {
                 ${recipe.ingredients.map(el => createIngredient(el)).join('')}
             </ul>
 
-            <button class="btn-small recipe__btn">
+            <button class="btn-small recipe__btn recipe__btn--add">
                 <svg class="search__icon">
                     <use href="img/icons.svg#icon-shopping-cart"></use>
                 </svg>
@@ -115,7 +124,6 @@ export const renderRecipe = recipe => {
                 <svg class="search__icon">
                     <use href="img/icons.svg#icon-triangle-right"></use>
                 </svg>
-
             </a>
         </div>
     `;
