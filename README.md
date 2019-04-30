@@ -4,13 +4,13 @@
 
 # Some of the core things learned were:
 
-APIs
-NPM
-Babel
-Webpack
-MVC architectural pattern
-ES6 classes
-ES6 modules
+APIs,
+NPM,
+Babel,
+Webpack,
+MVC architectural pattern,
+ES6 classes,
+ES6 modules,
 
 I learned many other concepts that are fundamental to programming in general.
 
