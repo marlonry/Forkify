@@ -29,6 +29,7 @@
     "axios": "^0.18.0",
     "fraction.js": "^4.0.12",
     "fractional": "^1.0.0",
+    "gh-pages": "^2.0.1",
     "save": "^2.3.3",
     "uniqid": "^5.0.3"
   }
